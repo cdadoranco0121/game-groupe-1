@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { generateGridMap } from './utils/utils';
+import Grid from './Grid/Grid';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    // array.map( (xItem, xIndex) => {
+    //     console.log("Row " + xIndex);
+
+    //     xItem.map( (yItem, yIndex) => {
+    //         console.log("\t Col " + yIndex);
+    //     })
+    // })
+    
+    return (
+        <div className="App">
+            <Grid matrix={generateGridMap(10,10)} />
+        </div>
+    );
 }
 
 export default App;
