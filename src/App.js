@@ -13,9 +13,9 @@ const matrixBlank = generateGridMapBlank(10,10);
 function App() {
 
     const [matrix, setMatrix] = useState(matrixBlank);
-    console.log(matrix);
 
-    const move = () => {
+    const moveTest = () => {
+
         const action = {
             currentPosition: [1,0],
             newPosition: [1,1],
@@ -27,14 +27,13 @@ function App() {
         }
 
         setMatrix(moveSquare(matrix, action));
-        console.log(matrix);
     }
 
 
     return (
         <div className="App">
             <Grid matrix={matrix} />
-            <button onClick={move}>Move</button>
+            <button onClick={moveTest}>Move</button>
             {/* <ButtonGroup></ButtonGroup> */}
         </div>
     );
