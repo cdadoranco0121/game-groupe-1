@@ -1,3 +1,5 @@
+// GRID
+
 const defaultPlayer = {
     number: 0,
     color: "lightgrey",
@@ -40,3 +42,23 @@ export const moveSquare = (matrix, action) => {
 
     return newMatrix;
 }
+
+// BUTTONS
+
+export const buttonsSimpleMoves = [
+    [
+        { name: "North West", sybmol: '↖', html: '&nwarr;', code: 0 },
+        { name: "Up", sybmol: '↑', html: '&uarr;', code: 1 },
+        { name: "North East", sybmol: '↗', html: '&nearr;', code: 2 },
+    ],
+    [
+        { name: 'Left', symbol: '←', html: '&larr;', code: 3 },
+        {},
+        { name: "Right", sybmol: '→', html: '&rarr;', code: 4 }
+    ],
+    [
+        { name: "South West", sybmol: '↙', html: '&swarr;', code: 5 },
+        { name: "Down", sybmol: '↓', html: '&darr;', code: 6 },
+        { name: "South East", sybmol: '↘', html: '&searr;', code: 7 },
+    ]
+]

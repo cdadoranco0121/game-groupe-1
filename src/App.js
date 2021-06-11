@@ -1,5 +1,5 @@
 import './App.css';
-import { generateGridMapBlank, moveSquare } from './utils/utils';
+import { generateGridMapBlank, moveSquare, buttonsSimpleMoves } from './utils/utils';
 import Grid from './Grid/Grid';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import { useState } from 'react';
@@ -30,19 +30,28 @@ function App() {
         setMatrix(moveSquare(matrix, action));
     }
 
-    const buttons = [
-        { name: "name", logo: "logo" }, {}, { name: "name", logo: "logo" }
-    ]
+    const handleButtonClick = (data) => {
+        console.log(data);
+    }
 
     return (
         <div className="App">
             <Grid matrix={matrix} />
-            <button onClick={moveTest}>Move</button>
-            <ButtonGroup buttons={buttons}>
+            <ButtonGroup buttons={buttonsSimpleMoves}
+                handleButtonClick={handleButtonClick}>
 
             </ButtonGroup>
         </div>
     );
 }
+
+// ← &larr;
+// ↑ &uarr;
+// → &rarr;
+// ↓ &darr;
+// ↖ &nwarr;
+// ↗ &nearr;
+// ↘ &searr;
+// ↙ &swarr;
 
 export default App;

@@ -3,13 +3,20 @@ import Button from '../Button/Button';
 
 const ButtonGroup = (props) => {
 
-    const { buttons } = props;
+    const { buttons, handleButtonClick } = props;
 
     return (
         <div>
-
-            {buttons.map(item => {
-                <Button />
+            {buttons.map( (xItem, xIndex) => {
+                return (
+                    <div className="grid-row" key={"grid-row-" + xIndex}>
+                        {xItem.map( (yItem, yIndex) => 
+                            <Button data={yItem} 
+                                handleButtonClick={handleButtonClick}
+                                key={`button-${xIndex}-${yIndex}`} /> 
+                        )}
+                    </div>
+                )
             })}
         </div>
     )
