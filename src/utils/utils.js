@@ -1,3 +1,9 @@
+const defaultPlayer = {
+    number: 0,
+    color: "lightgrey",
+    avatar: null
+}
+
 export const generateGridMapBlank = (x, y) => {
 
     const gridMap = [];
@@ -6,7 +12,7 @@ export const generateGridMapBlank = (x, y) => {
         gridMap[i] = [];
 
         for (let j = 0; j < y; j++) {
-            gridMap[i][j] = 0;
+            gridMap[i][j] = defaultPlayer;
         }
     }
 
@@ -14,21 +20,23 @@ export const generateGridMapBlank = (x, y) => {
 }
 
 export const moveSquare = (matrix, action) => {
-    const { currentPosition, newPosition, player : { number } } = action;
+    // Data
+    const { currentPosition, newPosition, player } = action;
     
+    // Coordinates
     const currentX = currentPosition[0];
     const currentY = currentPosition[1];
-
     const newX = newPosition[0];
     const newY = newPosition[1];
-
+    
+    // Init new matrix
     const newMatrix = [...matrix];
 
     // Remise à zéro
-    newMatrix[currentX][currentY] = 0;
+    newMatrix[currentX][currentY] = defaultPlayer;
 
     // Nouvelle position
-    newMatrix[newX][newY] = number;
+    newMatrix[newX][newY] = player;
 
     return newMatrix;
 }

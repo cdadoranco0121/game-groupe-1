@@ -1,6 +1,7 @@
 import './App.css';
 import { generateGridMapBlank, moveSquare } from './utils/utils';
 import Grid from './Grid/Grid';
+import ButtonGroup from './ButtonGroup/ButtonGroup';
 import { useState } from 'react';
 
 // const player = {
@@ -21,7 +22,7 @@ function App() {
             newPosition: [1,1],
             player: {
                 number: 1,
-                color: "red",
+                color: "blue",
                 avatar: ":)"
             }
         }
@@ -29,12 +30,17 @@ function App() {
         setMatrix(moveSquare(matrix, action));
     }
 
+    const buttons = [
+        { name: "name", logo: "logo" }, {}, { name: "name", logo: "logo" }
+    ]
 
     return (
         <div className="App">
             <Grid matrix={matrix} />
             <button onClick={moveTest}>Move</button>
-            {/* <ButtonGroup></ButtonGroup> */}
+            <ButtonGroup buttons={buttons}>
+
+            </ButtonGroup>
         </div>
     );
 }

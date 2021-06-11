@@ -11,8 +11,11 @@ const Grid = (props) => {
         <div className={classes.Grid}>
             { matrix.map( (xItem, xIndex) => {
                 return (
-                    <div className="grid-row">
-                        {xItem.map( (yItem, yIndex) => <Square data={yItem} />)}
+                    <div className="grid-row" key={"grid-row-" + xIndex}>
+                        {xItem.map( (yItem, yIndex) => <Square 
+                            data={yItem} 
+                            key={`square-${xIndex}-${yIndex}`} />
+                        )}
                     </div>
                 )})
             }
