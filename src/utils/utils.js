@@ -87,6 +87,10 @@ export const matrixReducer = (state, action) => {
         case "move_south_west":
         case "move_down":
         case "move_south_east":
+        case "move_up_left":
+        case "move_up_right":
+        case "move_down_left":
+        case "move_down_right":
             newState[newPosition[0]][newPosition[1]] = action.payload.player;
             return newState;
         default: 
@@ -94,7 +98,7 @@ export const matrixReducer = (state, action) => {
     }
 }
 
-// BUTTONS
+// BUTTONS DATA
 
 export const buttonsSimpleMoves = [
     [
@@ -111,5 +115,32 @@ export const buttonsSimpleMoves = [
         { name: "South West", sybmol: '↙', html: '&swarr;', code: 5, action_type: "move_south_west", action_payload: [1,-1] },
         { name: "Down", sybmol: '↓', html: '&darr;', code: 6, action_type: "move_down", action_payload: [1,0] },
         { name: "South East", sybmol: '↘', html: '&searr;', code: 7, action_type: "move_south_east", action_payload: [1,1] },
+    ]
+]
+
+export const buttonsSpecialMoves = [
+    [
+        {},
+        { name: "Up And Left", symbol: "↰", html: "&lsh;", code: 8, action_type: "move_up_left", action_payload: [-2,-1] },
+        { name: "Up And Right", symbol: "↱", html: "&rsh;", code: 9, action_type: "move_up_right", action_payload: [-2,1] },
+        {}
+    ],
+    [
+        {},
+        {},
+        {},
+        {}
+    ],
+    [
+        {},
+        {},
+        {},
+        {}
+    ],
+    [
+        {},
+        { name: "Down And Left", symbol: "↲", html: "&ldsh;", code: 10, action_type: "move_down_left", action_payload: [2,-1] },
+        { name: "Down And Right", symbol: "↳", html: "&rdsh;", code: 11, action_type: "move_down_right", action_payload: [2,1] },
+        {}
     ]
 ]

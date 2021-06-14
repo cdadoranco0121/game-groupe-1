@@ -1,8 +1,13 @@
+import { useReducer, useState } from 'react';
 import './App.css';
-import { generateGridMapBlank, buttonsSimpleMoves, matrixReducer } from './utils/utils';
 import Grid from './Grid/Grid';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
-import { useReducer, useState } from 'react';
+import { 
+    generateGridMapBlank, 
+    buttonsSimpleMoves, 
+    buttonsSpecialMoves,
+    matrixReducer 
+} from './utils/utils';
 
 // Init one player by default
 const initialPlayerState = { number: 1, color: "blue", avatar: ":)" }
@@ -25,7 +30,7 @@ function App() {
                 type: data.action_type,
                 payload: {
                     move: data.action_payload,
-                    player 
+                    player
                 }
             })
         }
@@ -34,9 +39,15 @@ function App() {
     return (
         <div className="App">
             <Grid matrix={matrix} />
-            <ButtonGroup buttons={buttonsSimpleMoves}
-                handleButtonClick={handleButtonClick}>
-            </ButtonGroup>
+            <br/>
+            <div class="button-group-wrapper">
+                <ButtonGroup buttons={buttonsSimpleMoves}
+                    handleButtonClick={handleButtonClick}>
+                </ButtonGroup>
+                <ButtonGroup buttons={buttonsSpecialMoves}
+                    handleButtonClick={handleButtonClick}>
+                </ButtonGroup>
+            </div>
         </div>
     );
 }
