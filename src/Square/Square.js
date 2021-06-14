@@ -5,7 +5,7 @@ import React from 'react';
 const Square = (props) => {
 
     const { data } = props;
-    const { number, color, avatar } = data;
+    const { color } = data;
 
     return (
         <div className="grid-col" style={{ backgroundColor: color }}></div>

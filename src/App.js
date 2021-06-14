@@ -1,37 +1,36 @@
 import './App.css';
-import { generateGridMapBlank, moveSquare, buttonsSimpleMoves } from './utils/utils';
+import { generateGridMapBlank, buttonsSimpleMoves, matrixReducer } from './utils/utils';
 import Grid from './Grid/Grid';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
-import { useState } from 'react';
-
-// const player = {
-//     name: "name",
-//     color: "red"
-// }
+import { useReducer, useState } from 'react';
 
 const matrixBlank = generateGridMapBlank(10,10);
 
+const initialPlayerState = {
+    number: 1,
+    color: "blue",
+    avatar: ":)"
+}
+
+matrixBlank[5][5] = initialPlayerState;
+
 function App() {
 
-    const [matrix, setMatrix] = useState(matrixBlank);
-
-    const moveTest = () => {
-
-        const action = {
-            currentPosition: [1,0],
-            newPosition: [1,1],
-            player: {
-                number: 1,
-                color: "blue",
-                avatar: ":)"
-            }
-        }
-
-        setMatrix(moveSquare(matrix, action));
-    }
+    const [player, setPlayer] = useState(initialPlayerState);
+    const [matrix, dispatch] = useReducer(matrixReducer, matrixBlank);
 
     const handleButtonClick = (data) => {
-        console.log(data);
+        
+        if (Object.keys(data).length > 0) {
+
+            dispatch({
+                type: data.action_type,
+                payload: {
+                    move: data.action_payload,
+                    player 
+                }
+            })
+        }
     }
 
     return (
@@ -39,19 +38,9 @@ function App() {
             <Grid matrix={matrix} />
             <ButtonGroup buttons={buttonsSimpleMoves}
                 handleButtonClick={handleButtonClick}>
-
             </ButtonGroup>
         </div>
     );
 }
-
-// ← &larr;
-// ↑ &uarr;
-// → &rarr;
-// ↓ &darr;
-// ↖ &nwarr;
-// ↗ &nearr;
-// ↘ &searr;
-// ↙ &swarr;
 
 export default App;
