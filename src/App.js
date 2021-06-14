@@ -4,14 +4,11 @@ import Grid from './Grid/Grid';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
 import { useReducer, useState } from 'react';
 
-const matrixBlank = generateGridMapBlank(10,10);
+// Init one player by default
+const initialPlayerState = { number: 1, color: "blue", avatar: ":)" }
 
-const initialPlayerState = {
-    number: 1,
-    color: "blue",
-    avatar: ":)"
-}
-
+// Init matrix
+const matrixBlank = generateGridMapBlank(11,11);
 matrixBlank[5][5] = initialPlayerState;
 
 function App() {

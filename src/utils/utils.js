@@ -53,6 +53,7 @@ const getSafePosition = (gridSize, position) => {
     const max_x = gridSize[0] - 1;
     const max_y = gridSize[1] - 1;
 
+    // Get positions between max and zero
     const safe_x = position[0] > max_x ? max_x : position[0] < 0 ? 0 : position[0];
     const safe_y = position[1] > max_y ? max_y : position[1] < 0 ? 0 : position[1];
 
