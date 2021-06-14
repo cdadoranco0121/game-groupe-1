@@ -30,8 +30,9 @@ const getCurrentPositionForPlayer = (matrix, player) => {
         pos[1] = row.findIndex( square => {
             return square.number === player.number;
         });
+
         // break loop if element is found
-        return pos[1] !== -1;
+        return pos[1] > -1;
     });
 
     // return position of player found
@@ -63,13 +64,15 @@ export const matrixReducer = (state, action) => {
     // Quick deep copy...
     const newState = JSON.parse(JSON.stringify(state));
 
+    console.log(state);
+
     // Get current position
     const currentPosition = getCurrentPositionForPlayer(newState, action.payload.player);
     
     // Mise à zéro de la position
     newState[currentPosition[0]][currentPosition[1]] = defaultPlayer;
 
-    const gridSize = [newState[0].length, newState[0][0].length];
+    const gridSize = [newState.length, newState[0].length];
     // Calculate new position
     const newPosition = getSafePosition(
         gridSize, 
