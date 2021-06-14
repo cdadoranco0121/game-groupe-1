@@ -21,6 +21,7 @@ function App() {
 
     const handleButtonClick = (data) => {
 
+        // prevent empty objects to dispatch
         if (Object.keys(data).length > 0) {
 
             dispatch({

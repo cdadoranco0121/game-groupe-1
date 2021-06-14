@@ -24,8 +24,6 @@ export const generateGridMapBlank = (x, y) => {
 const getCurrentPositionForPlayer = (matrix, player) => {
     const pos = [];
 
-    console.log("Inside getCurrentPositionForPlayer, matrix before find", matrix);
-
     // Find in rows
     pos[0] = matrix.findIndex( row => {
         // Find in square the element that matches palyer.number
@@ -37,9 +35,6 @@ const getCurrentPositionForPlayer = (matrix, player) => {
     });
 
     // return position of player found
-    console.log("Inside getCurrentPositionForPlayer, current x", pos[0] < 0 ? 0 : pos[0]);
-    console.log("Inside getCurrentPositionForPlayer, current y", pos[1] < 0 ? 0 : pos[1]);
-
     return [
         pos[0] < 0 ? 0 : pos[0],
         pos[1] < 0 ? 0 : pos[1]
@@ -69,11 +64,9 @@ export const matrixReducer = (state, action) => {
     const newState = JSON.parse(JSON.stringify(state));
 
     // Get current position
-    console.log("before getCurrentPositionForPlayer");
     const currentPosition = getCurrentPositionForPlayer(newState, action.payload.player);
     
     // Mise à zéro de la position
-    console.log("before Mise à zéro de la position");
     newState[currentPosition[0]][currentPosition[1]] = defaultPlayer;
 
     const gridSize = [newState[0].length, newState[0][0].length];
