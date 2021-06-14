@@ -20,7 +20,7 @@ function App() {
     const [matrix, dispatch] = useReducer(matrixReducer, matrixBlank);
 
     const handleButtonClick = (data) => {
-        
+
         if (Object.keys(data).length > 0) {
 
             dispatch({

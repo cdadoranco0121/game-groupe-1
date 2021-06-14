@@ -24,6 +24,8 @@ export const generateGridMapBlank = (x, y) => {
 const getCurrentPositionForPlayer = (matrix, player) => {
     const pos = [];
 
+    console.log("Inside getCurrentPositionForPlayer, matrix before find", matrix);
+
     // Find in rows
     pos[0] = matrix.findIndex( row => {
         // Find in square the element that matches palyer.number
@@ -31,23 +33,22 @@ const getCurrentPositionForPlayer = (matrix, player) => {
             return square.number === player.number;
         });
         // break loop if element is found
-        return pos[1] > 0;
+        return pos[1] !== -1;
     });
 
     // return position of player found
+    console.log("Inside getCurrentPositionForPlayer, current x", pos[0] < 0 ? 0 : pos[0]);
+    console.log("Inside getCurrentPositionForPlayer, current y", pos[1] < 0 ? 0 : pos[1]);
+
     return [
-        pos[0] > 0 ? pos[0] : 0,
-        pos[1] > 0 ? pos[1] : 0
+        pos[0] < 0 ? 0 : pos[0],
+        pos[1] < 0 ? 0 : pos[1]
     ];
 }
 
 const getNewPositionForPlayer = (currentPosition, payload) => {
     const new_x = currentPosition[0] + payload[0];
     const new_y = currentPosition[1] + payload[1];
-
-    console.log("currentPosition", currentPosition);
-    console.log("payload", payload);
-    console.log("new_x, new_y", new_x, new_y);
 
     return [new_x, new_y];
 }
@@ -58,7 +59,7 @@ const getSafePosition = (gridSize, position) => {
 
     const safe_x = position[0] > max_x ? max_x : position[0] < 0 ? 0 : position[0];
     const safe_y = position[1] > max_y ? max_y : position[1] < 0 ? 0 : position[1];
-    
+
     return [safe_x, safe_y];
 }
 
@@ -68,15 +69,19 @@ export const matrixReducer = (state, action) => {
     const newState = JSON.parse(JSON.stringify(state));
 
     // Get current position
-    const currentPosition = getCurrentPositionForPlayer(state, action.payload.player);
+    console.log("before getCurrentPositionForPlayer");
+    const currentPosition = getCurrentPositionForPlayer(newState, action.payload.player);
     
-    // Calculate new position
-    const gridSize = [newState[0].length, newState[0][0].length];
-
-    const newPosition = getSafePosition(gridSize, getNewPositionForPlayer(currentPosition, action.payload.move));
-
     // Mise à zéro de la position
+    console.log("before Mise à zéro de la position");
     newState[currentPosition[0]][currentPosition[1]] = defaultPlayer;
+
+    const gridSize = [newState[0].length, newState[0][0].length];
+    // Calculate new position
+    const newPosition = getSafePosition(
+        gridSize, 
+        getNewPositionForPlayer(currentPosition, action.payload.move)
+    );
 
     switch (action.type) {
         case "move_north_west":
