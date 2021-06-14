@@ -6,7 +6,7 @@ const Button = (props) => {
     const { data, handleButtonClick } = props;
 
     return (
-        <div className="grid-col" 
+        <div className="grid-col" style={{ cursor: "pointer"}}
             onClick={() => handleButtonClick(data)}>
             {decode(data.html)}
         </div>

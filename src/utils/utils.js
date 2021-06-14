@@ -64,8 +64,6 @@ export const matrixReducer = (state, action) => {
     // Quick deep copy...
     const newState = JSON.parse(JSON.stringify(state));
 
-    console.log(state);
-
     // Get current position
     const currentPosition = getCurrentPositionForPlayer(newState, action.payload.player);
     
