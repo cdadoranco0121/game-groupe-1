@@ -2,7 +2,7 @@ import { useReducer, useState } from 'react';
 import './App.css';
 import Grid from './Grid/Grid';
 import ButtonGroup from './ButtonGroup/ButtonGroup';
-import { 
+import {
     generateGridMapBlank, 
     buttonsSimpleMoves, 
     buttonsSpecialMoves,
@@ -10,11 +10,19 @@ import {
 } from './utils/utils';
 
 // Init one player by default
-const initialPlayerState = { number: 1, color: "blue", avatar: ":)" }
+const initialPlayerState = { number: 1, color: "blue" };
+const player2 = { number: 2, color: "red" };
 
 // Init matrix
 const matrixBlank = generateGridMapBlank(11,11);
-matrixBlank[5][5] = initialPlayerState;
+matrixBlank[9][9] = initialPlayerState;
+matrixBlank[1][1] = player2;
+
+const switchPlayer = (player) => {
+    return player.number === 1 
+        ? player2
+        : initialPlayerState;
+}
 
 function App() {
 
@@ -33,11 +41,15 @@ function App() {
                     player
                 }
             })
+
+            // MultiPlayer
+            setPlayer(switchPlayer(player));
         }
     }
 
     return (
         <div className="App">
+            <h1>Now playing: <span style={{ color: player.color}}>{player.number}</span></h1>
             <Grid matrix={matrix} />
             <br/>
             <div class="button-group-wrapper">

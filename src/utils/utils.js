@@ -1,6 +1,6 @@
 // GRID
 
-const defaultPlayer = {
+const blankPlayer = {
     number: 0,
     color: "lightgrey",
     avatar: null
@@ -14,7 +14,7 @@ export const generateGridMapBlank = (x, y) => {
         gridMap[i] = [];
 
         for (let j = 0; j < y; j++) {
-            gridMap[i][j] = defaultPlayer;
+            gridMap[i][j] = blankPlayer;
         }
     }
 
@@ -25,9 +25,9 @@ const getCurrentPositionForPlayer = (matrix, player) => {
     const pos = [];
 
     // Find in rows
-    pos[0] = matrix.findIndex( row => {
+    pos[0] = matrix.findIndex(row => {
         // Find in square the element that matches palyer.number
-        pos[1] = row.findIndex( square => {
+        pos[1] = row.findIndex(square => {
             return square.number === player.number;
         });
 
@@ -36,10 +36,7 @@ const getCurrentPositionForPlayer = (matrix, player) => {
     });
 
     // return position of player found
-    return [
-        pos[0] < 0 ? 0 : pos[0],
-        pos[1] < 0 ? 0 : pos[1]
-    ];
+    return [ pos[0], pos[1] ];
 }
 
 const getNewPositionForPlayer = (currentPosition, payload) => {
@@ -69,9 +66,10 @@ export const matrixReducer = (state, action) => {
     const currentPosition = getCurrentPositionForPlayer(newState, action.payload.player);
     
     // Mise à zéro de la position
-    newState[currentPosition[0]][currentPosition[1]] = defaultPlayer;
+    newState[currentPosition[0]][currentPosition[1]] = blankPlayer;
 
     const gridSize = [newState.length, newState[0].length];
+
     // Calculate new position
     const newPosition = getSafePosition(
         gridSize, 
@@ -79,6 +77,7 @@ export const matrixReducer = (state, action) => {
     );
 
     switch (action.type) {
+        // Simple moves
         case "move_north_west":
         case "move_up":
         case "move_north_east":
@@ -87,6 +86,7 @@ export const matrixReducer = (state, action) => {
         case "move_south_west":
         case "move_down":
         case "move_south_east":
+        // Special moves
         case "move_up_left":
         case "move_up_right":
         case "move_down_left":
